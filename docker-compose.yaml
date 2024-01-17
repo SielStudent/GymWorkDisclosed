@@ -11,3 +11,19 @@ services:
       MYSQL_PASSWORD: my_password
     ports:
       - "3306:3306"
+
+  web-app:
+    build: GymWorkDisclosedFront\gymworkdisclosedfront
+    container_name: web-app
+    ports:
+      - "3000:3000"
+  
+  backend:
+    build: GymWorkDisclosed
+    container_name: backend
+    environment:
+      - ASPNETCORE_URLS=http://+:5206
+    ports:
+      - "5206:5206"
+
+
