@@ -6,7 +6,6 @@ export default async function GymGoer(filter) {
     console.log("gymgoer", gymgoer);
     return (
         <div>
-            {/*<Filterbar gymgoer={gymgoer} />*/}
             {gymgoer.workouts.map(workout => (
                 <div key={workout.id}>
                     <h1>{workout.exercise.name} workout</h1>

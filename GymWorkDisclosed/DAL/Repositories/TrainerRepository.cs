@@ -29,4 +29,10 @@ public class TrainerRepository: ITrainerRepository
             .FirstOrDefault(pt => pt.Id == id);
         return personalTrainerEntity?.ToPersonalTrainer();
     }
+    public PersonalTrainer GetTrainerByEmail(string email)
+    {
+        PersonalTrainerEntity personalTrainerEntity = _context.personalTrainers
+            .FirstOrDefault(pt => pt.Email == email);
+        return personalTrainerEntity?.ToPersonalTrainer();
+    }
 }

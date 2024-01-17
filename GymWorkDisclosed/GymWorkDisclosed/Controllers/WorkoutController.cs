@@ -13,10 +13,12 @@ namespace GymWorkDisclosed.Controllers
     public class WorkoutController : ControllerBase
     {
         private readonly WorkoutService _workoutService;
+        private readonly SignalService _signalService;
         
-        public WorkoutController(WorkoutService workoutService)
+        public WorkoutController(WorkoutService workoutService, SignalService signalService)
         {
             _workoutService = workoutService;
+            _signalService = signalService;
         }
 
         // GET: api/Workout/5
@@ -87,6 +89,7 @@ namespace GymWorkDisclosed.Controllers
                     returnWorkoutDTO.Sets.Add(setDTO);
                 }
                 returnWorkoutDTO.Exercise = new ExerciseDTO(returnWorkout.Exercise.Id, returnWorkout.Exercise.Name);
+                _signalService.SendMessageToPersonalTrainer("One of your GymGoers has added a workout");
                 return Ok(returnWorkoutDTO);
             }
             catch (Exception e)

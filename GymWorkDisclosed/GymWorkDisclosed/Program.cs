@@ -5,11 +5,14 @@ using BusinessLogic.Services.Workout;
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using DAL.Repositories;
+using GymWorkDisclosed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using PersonalTrainerService;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSignalR();
 
 //Add Dependency Injection
 
@@ -23,6 +26,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<GymGoerService>();
 builder.Services.AddScoped<WorkoutService>();
 builder.Services.AddScoped<ExerciseService>();
+builder.Services.AddScoped<SignalService>();
 //Add DBContext
 
 IConfigurationRoot config = new ConfigurationBuilder()
@@ -73,10 +77,13 @@ var app = builder.Build();
 
 app.UseCors(corsPolicyBuilder =>
     corsPolicyBuilder
-        .WithOrigins("http://localhost:3000")
+        .WithOrigins("http://localhost:3000", "http://localhost:3001")
         .AllowAnyMethod()
-        .AllowAnyHeader());
+        .AllowAnyHeader()
+        .AllowCredentials());
 // Configure the HTTP request pipeline.
+
+app.MapHub<PersonalTrainerMessageHub>("/NewWorkoutMessage");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

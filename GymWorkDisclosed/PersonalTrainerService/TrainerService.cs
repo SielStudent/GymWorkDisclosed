@@ -13,4 +13,8 @@ public class TrainerService
     {
         return _trainerRepository.GetTrainer(id);
     }
+    public PersonalTrainer GetTrainerByEmail(string email)
+    {
+        return _trainerRepository.GetTrainerByEmail(email);
+    }
 }
