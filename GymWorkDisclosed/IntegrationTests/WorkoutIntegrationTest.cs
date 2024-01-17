@@ -129,9 +129,12 @@ public class WorkoutIntegrationTest
     public async Task ShouldPostNewWorkout()
     {
         //arrange
+        string token = await FireBaseAuthenticationUserBuilder.Auth();
+        var header = new AuthenticationHeaderValue("Bearer", token);
         _context.Database.EnsureCreated();
         DatabaseSeeder.Initialise(_context);
         DatabaseSeeder.Seed();
+        _client.DefaultRequestHeaders.Authorization = header;
 
         List<SetDTO> setDtos = new List<SetDTO>()
         {
@@ -139,7 +142,7 @@ public class WorkoutIntegrationTest
             new SetDTO(null, 10, 20, 30)
         };
         AddWorkoutDTO addWorkoutDTO = new AddWorkoutDTO(700, new Guid("b25b8dc7-9bf0-4c10-88f9-a4606314d2e5"),
-            new ExerciseDTO(null, "AddWorkout Extension"), setDtos);
+            new Guid("84c29521-b68a-475d-b700-51c9b245ff63"), setDtos);
         string json = JsonConvert.SerializeObject(addWorkoutDTO);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 

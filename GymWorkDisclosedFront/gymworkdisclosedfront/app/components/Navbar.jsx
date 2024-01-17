@@ -33,6 +33,7 @@ export default function Navbar() {
             <Link href='/'> Home </Link>
             <Link href="/Workouts"> Workouts </Link>
             <Link href="/Workouts/PersonalBests"> Personal Bests </Link>
+            <Link href="/Workouts/AddWorkout"> Add Workout </Link>
             <LoggedInUser/>
         </nav>
     )

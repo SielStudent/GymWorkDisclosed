@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import GymGoer from '../../(dashboard)/Workouts/WorkoutList'
+import GymGoer from '../../components/pagedata/WorkoutList'
 import {auth} from "../../components/firebase/firebase.config";
 import {getUser} from "../../components/services/userService";
 

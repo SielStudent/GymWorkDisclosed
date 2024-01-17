@@ -1,4 +1,4 @@
-import { getGymGoer } from '../../components/services/gymGoerService'
+import { getGymGoer } from '../services/gymGoerService'
 export default async function GymGoer(filter) {
     console.log("filter", filter)
     console.log("user in workoutlists", filter.filter[2]);

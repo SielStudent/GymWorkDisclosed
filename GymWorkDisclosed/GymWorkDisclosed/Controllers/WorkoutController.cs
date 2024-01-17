@@ -70,12 +70,11 @@ namespace GymWorkDisclosed.Controllers
         
         // POST: api/Workout
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult Post([FromBody] AddWorkoutDTO workoutDTO)
         {
             try
             {
-                Workout workout = new Workout(DateOnly.FromDateTime(DateTime.Now), workoutDTO.TimeInSeconds, new GymGoer(workoutDTO.GymGoerId), new Exercise(workoutDTO.Exercise.Name));
+                Workout workout = new Workout(DateOnly.FromDateTime(DateTime.Now), workoutDTO.TimeInSeconds, new GymGoer(workoutDTO.GymGoerId), new Exercise(workoutDTO.ExerciseId));
                 foreach (SetDTO setDto in workoutDTO.Sets)
                 {
                     workout.Sets.Add(new Set(setDto.Guid, setDto.Reps, setDto.Weight, setDto.TimeInSeconds));

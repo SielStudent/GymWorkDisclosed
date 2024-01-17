@@ -101,7 +101,7 @@ internal static class DatabaseSeeder
                 }
             },
             new ExerciseEntity{
-            Id = Guid.NewGuid(),
+            Id = new Guid("84c29521-b68a-475d-b700-51c9b245ff63"),
             Name = "AddWorkout Extension",
             MuscleGroupExerciseEntities = new List<MuscleGroupExerciseEntity>()
             {

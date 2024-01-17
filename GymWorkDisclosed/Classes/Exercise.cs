@@ -21,9 +21,9 @@ public class Exercise
         Workouts = new List<Workout>();
     }
 
-    public Exercise(string name)
+    public Exercise(Guid guid)
     {
-        Name = name;
+        Id = guid;
     }
     public void AddMuscleGroup(MuscleGroup muscleGroup)
     {

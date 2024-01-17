@@ -33,8 +33,7 @@ public class WorkoutRepository: IWorkoutRepository
     public Workout AddWorkout(Workout workout, Guid gymGoerId)
     {
         WorkoutEntity workoutEntity = new WorkoutEntity();
-        ExerciseEntity exercise = _context.exercises.First(e => e.Name == workout.Exercise.Name);
-        workoutEntity.ExerciseId = exercise.Id;
+        workoutEntity.ExerciseId = workout.Exercise.Id;
         workoutEntity.Date = DateTime.Now;
         workoutEntity.Time = workout.Time;
         foreach (Set set in workout.Sets)
