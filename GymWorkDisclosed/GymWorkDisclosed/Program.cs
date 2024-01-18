@@ -75,9 +75,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 var app = builder.Build();
 
+
+var CORS = config.GetSection("CorsSettings");
 app.UseCors(corsPolicyBuilder =>
     corsPolicyBuilder
-        .WithOrigins("http://localhost:3000", "http://localhost:3001")
+        .WithOrigins(CORS.GetSection("AllowedOrigins").Get<string[]>())
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
