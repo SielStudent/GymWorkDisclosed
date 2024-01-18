@@ -205,7 +205,7 @@ jobs:
       run: docker build -t sielpoppythornl/s3ip-web-app:frontend GymWorkDisclosedFront/gymworkdisclosedfront
 
     - name: Build Backend
-      run: docker build -t sielpoppythornl/s3ip-backend GymWorkDisclosed/GymWorkDisclosed
+      run: docker build -t sielpoppythornl/s3ip-backend GymWorkDisclosed
       
 
     - name: Log in to the docker hub
