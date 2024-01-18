@@ -202,11 +202,10 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Build Frontend
-      run: docker build -t docker sielpoppythornl/gymworkdisclosed:frontend GymWorkDisclosedFront/gymworkdisclosedfront
+      run: docker build -t sielpoppythornl/s3ip-web-app:frontend GymWorkDisclosedFront/gymworkdisclosedfront
 
     - name: Build Backend
-      run: docker build -t docker sielpoppythornl/gymworkdisclosed:backend GymWorkDisclosed/GymWorkDisclosed
-      
+      run: docker build -t sielpoppythornl/s3ip-backend GymWorkDisclosed/GymWorkDisclosed
       
 
     - name: Log in to the docker hub
@@ -216,10 +215,10 @@ jobs:
         password: ${{ secrets.DOCKERPASSWORD }}
 
     - name: Push Backend Docker Image to docker hub
-      run: docker push sielpoppythornl/gymworkdisclosed:backend
+      run: docker push sielpoppythornl/s3ip-backend
 
     - name: Push Frontend Docker Image to docker hub
-      run: docker push sielpoppythornl/gymworkdisclosed:frontend
+      run: docker push sielpoppythornl/s3ip-web-app:frontend
     
 
       
