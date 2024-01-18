@@ -10,19 +10,12 @@ describe("Personal Bests Page", () => {
     cy.wait(1000)
 
     cy.get("a").contains("Personal Bests").click()
-    cy.get("div").children().each((personalBest) => {
-
-      const exerciseName = personalBest.find("h1").text("Best Arm Curls workouts")
-      const bestTime = personalBest.find("h3").eq(0).text("Best Time: 300 seconds")
-      const mostWeight = personalBest.find("h3").eq(1).text("Most Weight: 30")
-      const totalReps = personalBest.find("h3").eq(2).text("Total Reps: 10")
-
-      cy.log(`${exerciseName}: ${bestTime}, ${mostWeight}, ${totalReps}`)
-
-      expect(exerciseName).to.not.be.empty
-      expect(bestTime).to.not.be.empty
-      expect(mostWeight).to.not.be.empty
-      expect(totalReps).to.not.be.empty
-    })
+    cy.wait(2000)
+  
+    cy.get('h1').contains('Arm Curls')
+      .parent()
+      .find('h3').contains('Best Time')
+      .invoke('text')
+      .should('equal', 'Best Time: 300 seconds')
   })
 })
