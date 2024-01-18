@@ -3,6 +3,8 @@ import Form from "../../../components/pagedata/AddWorkoutForm"
 import React from "react";
 import { auth } from "../../../components/firebase/firebase.config"
 import { getUser } from "../../../components/services/userService";
+import Link from "next/link";
+
 
 export default async function Workouts() {
     const email = auth.currentUser.email;

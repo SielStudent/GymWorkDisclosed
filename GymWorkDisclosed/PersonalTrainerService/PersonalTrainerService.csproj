@@ -10,4 +10,18 @@
       <ProjectReference Include="..\Classes\Classes.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\net7.0\PersonalTrainerService.AssemblyInfoInputs.cache" />
+      <Content Include="obj\Debug\net7.0\PersonalTrainerService.assets.cache" />
+      <Content Include="obj\PersonalTrainerService.csproj.nuget.dgspec.json" />
+      <Content Include="obj\project.assets.json" />
+      <Content Include="obj\project.nuget.cache" />
+      <Content Include="obj\project.packagespec.json" />
+      <Content Include="obj\rider.project.restore.info" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" />
+    </ItemGroup>
+
 </Project>

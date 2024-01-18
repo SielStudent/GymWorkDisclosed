@@ -1,30 +1,21 @@
-import Link from "next/link";
-import GoogleLoginUser from "./components/auth/Login";
-import Logout from "./components/auth/Logout";
+"use client"
 
 export default function Home() {
   return (
     <main>
       <h2>Dashboard</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero repellendus tempore, exercitationem odit, quasi doloremque possimus recusandae alias sequi totam soluta natus iure eius, obcaecati sint dolores blanditiis aspernatur quo officia iusto ut. Et, aliquid sed voluptates iste cum totam, facere explicabo, fugit suscipit ratione aspernatur consequuntur ex mollitia quaerat?</p>
-
-      <div className="flex justify-center my-8">
-        <Link href="/Workouts">
-          <button className="btn-primary">View Workouts</button>
-        </Link>
-          <button className="btn-primary" onClick={GoogleLoginUser}>Login</button>
-          <button className="btn-primary" onClick={Logout}>Logout</button>
-      </div>
-
-      <h2>Company Updates</h2>
+      <p>Welcome to GymWorkDisclosed, Your Ultimate Workout Companion! </p>
+      <p>Achieve your fitness goals with precision and motivation using our cutting-edge workout tracking platform. We understand that the journey to a healthier you is unique, and that's why we've crafted a user-friendly and intuitive tool to help you monitor, analyze, and optimize every aspect of your fitness routine.</p>
+      <br></br>
+      <h2>Key Features:</h2>
 
       <div className="card">
-        <h3>New member of the web dev team...</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, at quam. Dolores omnis possimus quam soluta rerum illo laborum ullam pariatur molestiae, modi beatae corrupti.</p>
+        <h3>Personalized Workout Plans: </h3>
+        <p>Tailor your workouts to match your fitness level, goals, and preferences. Whether you're a seasoned athlete or just starting, our platform adapts to you.</p>
       </div>
       <div className="card">
-        <h3>New website live!</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, at quam. Dolores omnis possimus quam soluta rerum illo laborum ullam pariatur molestiae, modi beatae corrupti, assumenda distinctio adipisci, cupiditate minima eum vitae? Similique dicta est facilis debitis, autem temporibus quo repellat illum unde id iste veritatis eveniet, aspernatur enim quas.</p>
+        <h3>Effortless Tracking:</h3>
+        <p>Say goodbye to pen-and-paper logging! Easily track your exercises, sets, reps, and weights. Our platform ensures your progress is at your fingertips, allowing you to focus on what matters – your workout.</p>
       </div>
     </main>
   )
