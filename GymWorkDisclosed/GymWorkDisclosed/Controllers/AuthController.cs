@@ -15,9 +15,9 @@ namespace GymWorkDisclosed.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly AuthService.AuthService _authService;
+        private readonly BusinessLogic.Services.AuthService.AuthService _authService;
         
-        public AuthController(AuthService.AuthService authService)
+        public AuthController(BusinessLogic.Services.AuthService.AuthService authService)
         {
             _authService = authService;
         }

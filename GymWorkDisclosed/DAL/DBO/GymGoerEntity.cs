@@ -10,6 +10,8 @@ public class GymGoerEntity
     public string Name { get; set; }
     public string Email { get; set; }
     public List<WorkoutEntity> Workouts { get; set; } = new List<WorkoutEntity>();
+    public PersonalTrainerEntity? PersonalTrainerEntity { get; set; }
+    public Guid? PersonalTrainerEntityId { get; set; }
     
     public GymGoer ToGymGoer()
     {

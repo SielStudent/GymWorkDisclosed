@@ -1,14 +1,18 @@
-using AuthService;
+using BusinessLogic.Services.AuthService;
 using BusinessLogic.Services.ExerciseService;
 using BusinessLogic.Services.GymGoer;
 using BusinessLogic.Services.Workout;
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using DAL.Repositories;
+using GymWorkDisclosed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using PersonalTrainerService;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSignalR();
 
 //Add Dependency Injection
 
@@ -16,10 +20,13 @@ builder.Services.AddTransient<IGymGoerRepository, GymGoerRepository>();
 builder.Services.AddTransient<IWorkoutRepository, WorkoutRepository>();
 builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<AuthService.AuthService>();
+builder.Services.AddTransient<ITrainerRepository, TrainerRepository>();
+builder.Services.AddScoped<TrainerService>();
+builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<GymGoerService>();
 builder.Services.AddScoped<WorkoutService>();
 builder.Services.AddScoped<ExerciseService>();
+builder.Services.AddScoped<SignalService>();
 //Add DBContext
 
 IConfigurationRoot config = new ConfigurationBuilder()
@@ -68,12 +75,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 var app = builder.Build();
 
+
+var CORS = config.GetSection("CorsSettings");
 app.UseCors(corsPolicyBuilder =>
     corsPolicyBuilder
-        .WithOrigins("http://localhost:3000")
+        .WithOrigins(CORS.GetSection("AllowedOrigins").Get<string[]>())
         .AllowAnyMethod()
-        .AllowAnyHeader());
+        .AllowAnyHeader()
+        .AllowCredentials());
 // Configure the HTTP request pipeline.
+
+app.MapHub<PersonalTrainerMessageHub>("/NewWorkoutMessage");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

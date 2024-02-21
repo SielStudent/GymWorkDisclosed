@@ -17,11 +17,14 @@ using Newtonsoft.Json;
 
          private static void CreateFirebaseApp()
          {
-             FirebaseApp.Create(new AppOptions
-             {  
-                Credential = GoogleCredential.FromFile("../../../gymworkdidsclosedoauth-firebase-adminsdk-x2pqe-b7e94828d2.json"),
+             if (FirebaseApp.DefaultInstance == null)
+             {
+                 FirebaseApp.Create(new AppOptions
+                 {  
+                     Credential = GoogleCredential.FromFile("../../../gymworkdidsclosedoauth-firebase-adminsdk-x2pqe-b7e94828d2.json"),
              
-             });
+                 });
+             }
          }
 
          internal static async Task<string> Auth()

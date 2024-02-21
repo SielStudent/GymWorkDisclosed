@@ -3,6 +3,7 @@
 export default async function PersonalBestList(data) {
     console.log("usertest", data)
     const PersonalBests = await getPersonalBests(data)
+    console.log(PersonalBests)
     return (
         <div>
             {PersonalBests.exercises.map(personalbest => (

@@ -1,8 +1,8 @@
 "use client";
 import React from 'react'
-import GymGoer from '../../(dashboard)/Workouts/WorkoutList'
-import {auth} from "@/app/components/firebase/firebase.Config";
-import {getUser} from "@/app/components/services/userService";
+import GymGoer from '../../components/pagedata/WorkoutList'
+import {auth} from "../../components/firebase/firebase.config";
+import {getUser} from "../../components/services/userService";
 
 
 export default async function Workouts() {

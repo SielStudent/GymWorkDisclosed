@@ -29,12 +29,8 @@
       <ProjectReference Include="..\AuthService\AuthService.csproj" />
       <ProjectReference Include="..\ExerciseService\ExerciseService.csproj" />
       <ProjectReference Include="..\GymGoerService\GymGoerService.csproj" />
+      <ProjectReference Include="..\PersonalTrainerService\PersonalTrainerService.csproj" />
       <ProjectReference Include="..\WorkoutService\WorkoutService.csproj" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>

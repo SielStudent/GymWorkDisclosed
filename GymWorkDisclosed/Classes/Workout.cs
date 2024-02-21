@@ -26,6 +26,14 @@ public class Workout
         Sets = sets;
         Exercise = exercise;
     }
+    public Workout(DateOnly date, int time, GymGoer gymGoer, Exercise exercise)
+    {
+        Date = date;
+        Time = time;
+        GymGoer = gymGoer;
+        Exercise = exercise;
+        Sets = new List<Set>();
+    }
 
     public Workout()
     {

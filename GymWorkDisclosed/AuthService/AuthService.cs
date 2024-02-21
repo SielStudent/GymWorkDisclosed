@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Classes;
 
-namespace AuthService;
+namespace BusinessLogic.Services.AuthService;
 
 public class AuthService
 {
@@ -11,19 +11,9 @@ public class AuthService
         _authRepository = authRepository;
     }
     
-    public GymGoer CreateGymGoer(GymGoer gymGoer)
-    {
-        return _authRepository.CreateGymGoerIfDoesntExist(gymGoer);
-    }
-    
     public GymGoer GetGymGoerByEmail(string email)
     {
         GymGoer? gymGoer = _authRepository.GetGymGoerByEmail(email);
         return gymGoer;
     }
-    
-    // public bool CheckIfGymGoerExists(string email)
-    // {
-    //     return _authRepository.GetGymGoerByEmail(email) != null;
-    // }
 }

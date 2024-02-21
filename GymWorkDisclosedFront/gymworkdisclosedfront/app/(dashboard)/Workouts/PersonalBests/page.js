@@ -1,6 +1,6 @@
 ﻿"use client";
 import PersonalBestList from "../../../components/pagedata/PersonalBestList";
-import {auth} from "../../../components/firebase/firebase.Config";
+import {auth} from "../../../components/firebase/firebase.config";
 import {getUser} from "../../../components/services/userService";
 
 

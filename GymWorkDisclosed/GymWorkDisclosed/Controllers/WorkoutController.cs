@@ -13,10 +13,12 @@ namespace GymWorkDisclosed.Controllers
     public class WorkoutController : ControllerBase
     {
         private readonly WorkoutService _workoutService;
+        private readonly SignalService _signalService;
         
-        public WorkoutController(WorkoutService workoutService)
+        public WorkoutController(WorkoutService workoutService, SignalService signalService)
         {
             _workoutService = workoutService;
+            _signalService = signalService;
         }
 
         // GET: api/Workout/5
@@ -66,6 +68,35 @@ namespace GymWorkDisclosed.Controllers
             }
 
             return Ok(personalBestWorkoutsDTO);
+        }
+        
+        // POST: api/Workout
+        [HttpPost]
+        public IActionResult Post([FromBody] AddWorkoutDTO workoutDTO)
+        {
+            try
+            {
+                Workout workout = new Workout(DateOnly.FromDateTime(DateTime.Now), workoutDTO.TimeInSeconds, new GymGoer(workoutDTO.GymGoerId), new Exercise(workoutDTO.ExerciseId));
+                foreach (SetDTO setDto in workoutDTO.Sets)
+                {
+                    workout.Sets.Add(new Set(setDto.Guid, setDto.Reps, setDto.Weight, setDto.TimeInSeconds));
+                }
+                Workout returnWorkout = _workoutService.AddWorkout(workout, workoutDTO.GymGoerId);
+                WorkoutDTO returnWorkoutDTO = new WorkoutDTO(returnWorkout.Id, returnWorkout.Time, returnWorkout.Date);
+                foreach (Set set in returnWorkout.Sets)
+                {
+                    SetDTO setDTO = new SetDTO(set.Id, set.Reps, set.Weight, set.Time);
+                    returnWorkoutDTO.Sets.Add(setDTO);
+                }
+                returnWorkoutDTO.Exercise = new ExerciseDTO(returnWorkout.Exercise.Id, returnWorkout.Exercise.Name);
+                _signalService.SendMessageToPersonalTrainer("One of your GymGoers has added a workout");
+                return Ok(returnWorkoutDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

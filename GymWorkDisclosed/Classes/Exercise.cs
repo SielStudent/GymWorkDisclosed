@@ -20,6 +20,11 @@ public class Exercise
         MuscleGroups = muscleGroups;
         Workouts = new List<Workout>();
     }
+
+    public Exercise(Guid guid)
+    {
+        Id = guid;
+    }
     public void AddMuscleGroup(MuscleGroup muscleGroup)
     {
         MuscleGroups.Add(muscleGroup);

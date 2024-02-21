@@ -18,11 +18,9 @@ public class WorkoutService
         _currentBestRepsWorkout = new Classes.Workout();
     }
     
-    public List<Classes.Workout> GetWorkoutsByGymGoerId(Guid id)
+    public Classes.Workout AddWorkout(Classes.Workout workout, Guid gymGoerId)
     {
-        List<Classes.Workout> workouts = _workoutRepository.GetWorkoutsByGymGoerId(id);
-
-        return workouts;
+        return _workoutRepository.AddWorkout(workout, gymGoerId);
     }
     
     public List<Exercise> GetPersonalBestWorkoutsPerExerciseByGymGoerId(Guid gymGoerId)

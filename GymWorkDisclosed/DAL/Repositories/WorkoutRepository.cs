@@ -29,4 +29,33 @@ public class WorkoutRepository: IWorkoutRepository
         }
         return workouts;
     }
+
+    public Workout AddWorkout(Workout workout, Guid gymGoerId)
+    {
+        WorkoutEntity workoutEntity = new WorkoutEntity();
+        workoutEntity.ExerciseId = workout.Exercise.Id;
+        workoutEntity.Date = DateTime.Now;
+        workoutEntity.Time = workout.Time;
+        foreach (Set set in workout.Sets)
+        {
+            SetEntity setEntity = new SetEntity();
+            setEntity.Id = Guid.NewGuid();
+            setEntity.Reps = set.Reps;
+            setEntity.Time = set.Time;
+            setEntity.Weight = set.Weight;
+            workoutEntity.Sets.Add(setEntity);
+        }
+        workoutEntity.GymGoerId = gymGoerId;
+        _context.workouts.Add(workoutEntity);
+        _context.SaveChanges();
+        WorkoutEntity returnWorkoutEntity = _context.workouts
+            .Include(w => w.Sets)
+            .Include(w => w.ExerciseEntity)
+            .ThenInclude(e => e.MuscleGroupExerciseEntities)
+            .ThenInclude(mge => mge.MuscleGroupEntity)
+            .ThenInclude(mg => mg.BodyPartEntity)
+            .First(w => w.Id == workoutEntity.Id);
+        return returnWorkoutEntity.ToWorkout(workoutEntity.ExerciseEntity.MuscleGroupExerciseEntities.Select(mge => mge.MuscleGroupEntity).ToList());
+    }
+    
 }

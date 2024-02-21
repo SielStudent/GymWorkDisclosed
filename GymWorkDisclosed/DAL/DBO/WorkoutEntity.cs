@@ -9,7 +9,7 @@ public class WorkoutEntity
     public int Time { get; set; }
     public Guid GymGoerId { get; set; }
     public GymGoerEntity GymGoerEntity { get; set; }
-    public List<SetEntity> Sets { get; set; }
+    public List<SetEntity> Sets { get; set; } = new List<SetEntity>();
     public Guid ExerciseId { get; set; }
     public ExerciseEntity ExerciseEntity { get; set; }
   

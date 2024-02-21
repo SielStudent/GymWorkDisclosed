@@ -14,6 +14,7 @@ public class GymWorkoutDisclosedDBContext: DbContext
     public DbSet<MuscleGroupEntity> muscleGroups { get; set; }
     public DbSet<SetEntity> sets { get; set; }
     public DbSet<WorkoutEntity> workouts { get; set; }
+    public DbSet<PersonalTrainerEntity> personalTrainers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,6 +53,12 @@ public class GymWorkoutDisclosedDBContext: DbContext
             .HasMany(w => w.Sets)
             .WithOne(s => s.WorkoutEntity)
             .HasForeignKey(s => s.WorkoutId);
+        
+        modelBuilder.Entity<PersonalTrainerEntity>()
+            .HasMany(t => t.GymGoers)
+            .WithOne(g => g.PersonalTrainerEntity)
+            .HasForeignKey(g => g.PersonalTrainerEntityId);
+            
     }
 }
 

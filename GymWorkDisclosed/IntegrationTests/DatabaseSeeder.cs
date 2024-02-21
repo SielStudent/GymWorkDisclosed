@@ -13,25 +13,12 @@ internal static class DatabaseSeeder
     }
     internal static void Seed()
     {
-        GymGoerEntity gymGoerEntity = AddGymGoerEntity();
+        PersonalTrainerEntity personalTrainerEntity = AddPersonalTrainerEntity();
         BodyPartEntity bodyPartEntity = AddBodyPartEntity();
         List<MuscleGroupEntity> muscleGroupEntities = AddMuscleGroupEntities(bodyPartEntity);
+        GymGoerEntity gymGoerEntity = AddGymGoerEntity(personalTrainerEntity);
         List<ExerciseEntity> exerciseEntities = AddExerciseEntities(muscleGroupEntities);
         List<WorkoutEntity> workoutEntities = AddWorkoutEntities(gymGoerEntity, exerciseEntities);
-        
-    }
-
-    internal static GymGoerEntity AddGymGoerEntity()
-    {
-        var gymGoerEntity = new GymGoerEntity
-        {
-            Id = new Guid("b25b8dc7-9bf0-4c10-88f9-a4606314d2e5"),
-            Name = "Test",
-            Email = "Test",
-        };
-        _context.gymGoer.Add(gymGoerEntity);
-        _context.SaveChanges();
-        return gymGoerEntity;
     }
 
     internal static BodyPartEntity AddBodyPartEntity()
@@ -44,6 +31,19 @@ internal static class DatabaseSeeder
         _context.bodyParts.Add(bodyPartEntity);
         _context.SaveChanges();
         return bodyPartEntity;
+    }
+    internal static GymGoerEntity AddGymGoerEntity(PersonalTrainerEntity personalTrainerEntity)
+    {
+        var gymGoerEntity = new GymGoerEntity
+        {
+            Id = new Guid("b25b8dc7-9bf0-4c10-88f9-a4606314d2e5"),
+            Name = "Test",
+            Email = "user@example.com",
+            PersonalTrainerEntityId = personalTrainerEntity.Id
+        };
+        _context.gymGoer.Add(gymGoerEntity);
+        _context.SaveChanges();
+        return gymGoerEntity;
     }
 
     internal static List<MuscleGroupEntity> AddMuscleGroupEntities(BodyPartEntity bodyPartEntity)
@@ -99,7 +99,19 @@ internal static class DatabaseSeeder
                         MuscleGroupEntity = muscleGroupEntities[1]
                     }
                 }
+            },
+            new ExerciseEntity{
+            Id = new Guid("84c29521-b68a-475d-b700-51c9b245ff63"),
+            Name = "AddWorkout Extension",
+            MuscleGroupExerciseEntities = new List<MuscleGroupExerciseEntity>()
+            {
+                new MuscleGroupExerciseEntity
+                {
+                    MuscleGroupId = muscleGroupEntities[1].Id,
+                    MuscleGroupEntity = muscleGroupEntities[1]
+                }
             }
+        }
         };
         _context.exercises.AddRange(exerciseEntities);
         _context.SaveChanges();
@@ -195,5 +207,18 @@ internal static class DatabaseSeeder
         _context.workouts.AddRange(workoutEntities);
         _context.SaveChanges();
         return workoutEntities;
+    }
+
+    internal static PersonalTrainerEntity AddPersonalTrainerEntity()
+    {
+        PersonalTrainerEntity personalTrainerEntity = new PersonalTrainerEntity()
+        {
+            Id = new Guid("c9bf8bd0-fba3-4ee7-b414-925136964129"),
+            Name = "TrainerTest",
+            Email = "Trainer@test.com",
+        };
+        _context.personalTrainers.Add(personalTrainerEntity);
+        _context.SaveChanges();
+        return personalTrainerEntity;
     }
 }

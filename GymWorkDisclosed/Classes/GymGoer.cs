@@ -21,6 +21,11 @@ public class GymGoer
         Email = email;
         Workouts = new List<Workout>();
     }
+
+    public GymGoer(Guid id)
+    {
+        Id = id;
+    }
     public void AddWorkout(Workout workout)
     {
         Workouts.Add(workout);

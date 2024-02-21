@@ -63,7 +63,12 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid?>("PersonalTrainerEntityId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonalTrainerEntityId");
 
                     b.ToTable("gymGoer");
                 });
@@ -101,6 +106,25 @@ namespace DAL.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("MuscleGroupExerciseEntity");
+                });
+
+            modelBuilder.Entity("DAL.DBO.PersonalTrainerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("personalTrainers");
                 });
 
             modelBuilder.Entity("DAL.DBO.SetEntity", b =>
@@ -153,6 +177,15 @@ namespace DAL.Migrations
                     b.HasIndex("GymGoerId");
 
                     b.ToTable("workouts");
+                });
+
+            modelBuilder.Entity("DAL.DBO.GymGoerEntity", b =>
+                {
+                    b.HasOne("DAL.DBO.PersonalTrainerEntity", "PersonalTrainerEntity")
+                        .WithMany("GymGoers")
+                        .HasForeignKey("PersonalTrainerEntityId");
+
+                    b.Navigation("PersonalTrainerEntity");
                 });
 
             modelBuilder.Entity("DAL.DBO.MuscleGroupEntity", b =>
@@ -235,6 +268,11 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.DBO.MuscleGroupEntity", b =>
                 {
                     b.Navigation("MuscleGroupExerciseEntities");
+                });
+
+            modelBuilder.Entity("DAL.DBO.PersonalTrainerEntity", b =>
+                {
+                    b.Navigation("GymGoers");
                 });
 
             modelBuilder.Entity("DAL.DBO.WorkoutEntity", b =>
